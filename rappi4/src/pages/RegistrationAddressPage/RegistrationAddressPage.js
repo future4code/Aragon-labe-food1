@@ -9,10 +9,10 @@ export default function RegistrationAddressPage() {
     const createAddress = (e) => {
         e.preventDefault();
 
-        requestAddress(form, navigate, clear)
+        requestAddress(form, navigate)
     }
 
-    const {form, onChange, clear} = useForm({})
+    const {form, onChange} = useForm({street:"", number:"", neighbourhood:"",city:"", state:"", complement:"" })
     
     return (
         <main>
@@ -85,7 +85,7 @@ export default function RegistrationAddressPage() {
                     />
                 </section>
 
-                <button type={"submit"} >Salvar</button>
+                <button type={"submit"}>Salvar</button>
             </form >
         </main>
     )

@@ -24,7 +24,7 @@ export const requestSignup = (form, navigate) => {
         })
 }
 
-export const requestLogin = (form, clear, navigate) => {
+export const requestLogin = (form, navigate) => {
     const body = {
         email: form.email,
         password: form.password,
@@ -43,7 +43,7 @@ export const requestLogin = (form, clear, navigate) => {
         })
 }
 
-export const requestAddress = (form, clear, navigate) => {
+export const requestAddress = (form, navigate) => {
     const body = {
         street: form.street,
         number: form.number,
