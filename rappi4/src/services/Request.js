@@ -1,6 +1,6 @@
 import { BASE_URL, HEADERS } from "../constantes/url";
 import axios from "axios";
-import { goToFeed } from "../routes/Coordinator";
+import { goToAddress, goToFeed } from "../routes/Coordinator";
 
 
 export const requestSignup = (form, navigate) => {
@@ -16,7 +16,7 @@ export const requestSignup = (form, navigate) => {
             localStorage.setItem("token", res.data.token);
             localStorage.setItem("user", JSON.stringify(res.data.user));
             alert("Cadastro realizado com sucesso!");
-            goToFeed(navigate)
+            goToAddress(navigate)
         })
         .catch((err) => {
             alert("Erro ao fazer cadastro.")
