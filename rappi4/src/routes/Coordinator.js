@@ -1,13 +1,15 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+export const goToLogin = (navigate) => {
+  navigate("/login")
+}
 
-const Router = () => {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route />
-      </Routes>
-    </BrowserRouter>
-  );
-};
+export const goToSignup = (navigate) => {
+  navigate("/signup")
+}
 
-export default Router;
+export const goToFeed = (navigate) => {
+  navigate("/feed")
+}
+
+export const goToAddress = (navigate) => {
+  navigate("/address")
+}
