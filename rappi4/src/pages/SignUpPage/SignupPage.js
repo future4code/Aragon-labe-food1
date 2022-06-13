@@ -10,7 +10,8 @@ export default function SignupPage() {
 
     const { form, onChange, clear } = useForm({ name: "", email: "", cpf: "", password: "" })
 
-    const createAccount = () => {
+    const createAccount = (e) => {
+        e.preventDefault();
         requestSignup(form, clear, navigate)
     }
 
