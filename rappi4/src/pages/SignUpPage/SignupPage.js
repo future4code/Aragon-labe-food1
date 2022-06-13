@@ -1,18 +1,18 @@
 import { useNavigate } from "react-router-dom";
 import useForm from "../../hooks/useForm";
 import LogoGeral from "../../images/logoGeral.png"
-import { goToLogin } from "../../routes/Coordinator";
+import { goToAddress, goToLogin } from "../../routes/Coordinator";
 import { requestSignup } from "../../services/Request";
 
 
 export default function SignupPage() {
     const navigate = useNavigate()
 
-    const { form, onChange, clear } = useForm({ name: "", email: "", cpf: "", password: "" })
+    const { form, onChange } = useForm({ name: "", email: "", cpf: "", password: "" })
 
     const createAccount = (e) => {
         e.preventDefault();
-        requestSignup(form, clear, navigate)
+        requestSignup(form, navigate)
     }
 
 
@@ -83,7 +83,7 @@ export default function SignupPage() {
                     />
                 </section>
 
-                <button type={"submit"} >Criar</button>
+                <button type={"submit"}>Criar</button>
             </form>
             <button onClick={() => goToLogin(navigate)}> Voltar</button>
         </main>
