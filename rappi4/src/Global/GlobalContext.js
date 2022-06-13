@@ -1,1 +1,3 @@
-export const GlobalContext = React.createContext();
+import { createContext } from "react";
+
+export const GlobalContext = createContext();
