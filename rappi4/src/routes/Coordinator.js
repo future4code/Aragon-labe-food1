@@ -14,6 +14,6 @@ export const goToAddress = (navigate) => {
   navigate("/address");
 };
 
-export const goToResultPage = (navigate) => {
-  navigate(`/feed/${restaurantId}`);
+export const goToResultPage = (navigate, restaurantId) => {
+  navigate(`/feed/restaurant/${restaurantId}`);
 };

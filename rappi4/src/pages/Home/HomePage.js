@@ -1,11 +1,14 @@
-
 import { RestaurantCard } from "../../components/RestaurantCard";
-import useRequestData from "../../hooks/UseRequestData";
+import { useProtectedPage } from "../../hooks/useProtectedPage";
+import { useRequestData } from "../../hooks/useRequestData";
 
 export default function HomePage() {
+  useProtectedPage();
+
   const [data] = useRequestData("rappi4A/restaurants", []);
 
   console.log(data);
+
   return (
     <div>
       <input placeholder="Restaurante"></input>
