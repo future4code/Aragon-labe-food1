@@ -8,7 +8,7 @@ export const RestaurantCard = (props) => {
     <div>
       <img
         onClick={() => {
-          goToResultPage(navigate, props.restaurant.name);
+          goToResultPage(navigate, props.restaurant.id);
         }}
         width={"50%"}
         src={props.restaurant.logoUrl}
