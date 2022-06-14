@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "../pages/Home/HomePage";
 import LoginPage from "../pages/LoginPage/LoginPage";
+import PerfilPage from "../pages/PerfilPagee/PerfilPage";
 import RegistrationAddressPage from "../pages/RegistrationAddressPage/RegistrationAddressPage";
 import ResultPage from "../pages/ResultPage/ResultPage";
 import SignupPage from "../pages/SignUpPage/SignupPage";
@@ -16,6 +17,7 @@ export default function Router() {
         <Route path="/feed" element={<HomePage />} />
         <Route path="/address" element={<RegistrationAddressPage />} />
         <Route path="/feed/restaurant/:restaurantId" element={<ResultPage />} />
+        <Route path="/profile" element={<PerfilPage />} />
       </Routes>
     </BrowserRouter>
   );
