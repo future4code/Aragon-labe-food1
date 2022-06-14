@@ -1,15 +1,19 @@
 export const goToLogin = (navigate) => {
-  navigate("/login")
-}
+  navigate("/login");
+};
 
 export const goToSignup = (navigate) => {
-  navigate("/signup")
-}
+  navigate("/signup");
+};
 
 export const goToFeed = (navigate) => {
-  navigate("/feed")
-}
+  navigate("/feed");
+};
 
 export const goToAddress = (navigate) => {
-  navigate("/address")
-}
+  navigate("/address");
+};
+
+export const goToResultPage = (navigate) => {
+  navigate(`/feed/${restaurantId}`);
+};

@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
-import { BASE_URL } from "../constants/urls";
 import axios from "axios";
-import { BASE_URL } from "../constantes/url";
+import { BASE_URL, HEADERS } from "../constantes/url";
 
 const useRequestData = (path, state) => {
   const [data, setData] = useState(state);
 
   const getData = () => {
     axios
-      .get(`${BASE_URL}/${path}`)
+      .get(`${BASE_URL}${path}`, HEADERS)
       .then((res) => {
+        alert("deu certo");
         setData(res.data);
       })
       .catch((err) => {
@@ -21,7 +21,7 @@ const useRequestData = (path, state) => {
     getData();
   }, [path]);
 
-  return [data, getData];
+  return [data];
 };
 
 export default useRequestData;
