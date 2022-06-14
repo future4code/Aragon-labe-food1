@@ -16,6 +16,7 @@ export default function RegistrationAddressPage() {
     
     return (
         <main>
+             isProtected={false}
             <form onSubmit={createAddress}>
                 <h2>Meu endereço</h2>
 

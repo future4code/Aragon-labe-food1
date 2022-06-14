@@ -1,11 +1,20 @@
-import { useNavigate } from "react-router-dom";
-import useForm from "../../hooks/useForm";
-import LogoGeral from "../../images/logoGeral.png";
+
+import { useProtectedPage } from "../../hooks/useProtectedPage";
+import LogoGeral from "../../images/logoGeral.png"
 import { goToAddress, goToLogin } from "../../routes/Coordinator";
 import { requestSignup } from "../../services/Request";
 
 export default function SignupPage() {
-  const navigate = useNavigate();
+
+    const navigate = useNavigate();
+    
+    const { form, onChange } = useForm({ name: "", email: "", cpf: "", password: "" })
+
+    const createAccount = (e) => {
+        e.preventDefault();
+        requestSignup(form, navigate)
+    }
+
 
   const { form, onChange } = useForm({
     name: "",

@@ -1,3 +1,10 @@
-export const ResultPage = () => {
-  return <></>;
-};
+export default function SearchPage() {
+    useProtectedPage();
+
+    return(
+        <>
+        isProtected={true}
+        </>
+    )
+}
+
