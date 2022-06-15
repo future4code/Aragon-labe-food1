@@ -9,7 +9,6 @@ export const useRequestData = (path, state) => {
     axios
       .get(`${BASE_URL}${path}`, HEADERS)
       .then((res) => {
-        alert("deu certo");
         setData(res.data);
       })
       .catch((err) => {
