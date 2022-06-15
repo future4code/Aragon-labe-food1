@@ -26,6 +26,7 @@ export const RestaurantDetailCard = (props) => {
                 currency: "BRL",
               })}
             </p>
+            <button>Adicionar ao carrinho</button>
             <hr />
           </div>
         );
