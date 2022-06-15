@@ -1,36 +1,34 @@
+import { OrdersHistoryCard } from "../../components/OrdersHistoryCard";
 import { useProtectedPage } from "../../hooks/useProtectedPage";
 import { useRequestData } from "../../hooks/useRequestData";
 
 
 export default function PerfilPage() {
+
     useProtectedPage();
-    const [data] = useRequestData("rappi4A/profile", {})
 
-    const showAddress = () => {
-        // if (data.user?.hasAddress === true) {
-        //     <div>
-        //         <p>Endereço Cadastrado:</p>
-        //         <span>{data.user?.address}</span>
-        //     </div>
-        // }
-    }
+    const [profile] = useRequestData("rappi4A/profile", {});
+console.log(profile)
+    const [data] = useRequestData("rappi4/orders/history", []);
 
-    console.log(data.user?.hasAddress)
-    console.log(data.user?.address)
     return (
         <>
             <main>
-                <span>Meu Perfil</span>
-                <h3>{data.user?.name}</h3>
-                {data.user?.email}
-                <p>{data.user?.cpf}</p>
-                {/* {showAddress} */}
-                {data.user?.hasAddress ?
+                <span>Meu Perfil</span> <br />
+                <span>{profile.user?.name}</span> <br />
+                {profile.user?.email} <br />
+
+
+                <span>{profile.user?.cpf}</span>
+                {profile.user?.hasAddress ?
                     <div>
-                        <p>Endereço Cadastrado:</p>
-                        <span>{data.user?.address}</span>
+                        <span>Endereço Cadastrado:</span> <br />
+                        <span>{profile.user?.address}</span>
                     </div> : <span>Usuario sem enderço cadastrado</span>
                 }
+                <span>Histórico de pedidos</span><br />
+                <hr />
+                {/* <OrdersHistoryCard ???={data} /> */}
             </main>
         </>
     )

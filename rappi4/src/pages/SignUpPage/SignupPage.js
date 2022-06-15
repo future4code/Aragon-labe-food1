@@ -22,6 +22,15 @@ export default function SignupPage() {
     requestSignup(form, navigate);
   };
 
+  const cpfConvert = (value) => {
+    return value
+      .replace(/\D/g, "")
+      .replace(/(\d{3})(\d)/, "$1.$2")
+      .replace(/(\d{3})(\d)/, "$1.$2")
+      .replace(/(\d{3})(\d{1,2})/, "$1-$2")
+      .replace(/(-\d{2})\d+?$/, "$1");
+  };
+
   return (
     <main>
       <img src={LogoGeral} />
@@ -56,7 +65,7 @@ export default function SignupPage() {
             id="cpf"
             placeholder="000.000.000-00"
             name={"cpf"}
-            value={form.cpf}
+            value={cpfConvert(form.cpf)}
             onChange={onChange}
             required
           />

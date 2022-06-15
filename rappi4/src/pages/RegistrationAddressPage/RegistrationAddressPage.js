@@ -37,7 +37,6 @@ export default function RegistrationAddressPage() {
                         placeholder="Número"
                         name={"number"}
                         value={form.number}
-                        type={"number"}
                         onChange={onChange}
                         required
                     />
