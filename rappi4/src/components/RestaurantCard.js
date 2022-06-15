@@ -16,6 +16,7 @@ export const RestaurantCard = (props) => {
       <p>{props.restaurant.name}</p>
       <p>{props.restaurant.deliveryTime}</p>
       <p>R${props.restaurant.shipping},00</p>
+      <hr />
     </div>
   );
 };
