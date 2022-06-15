@@ -1,10 +1,14 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { CategoryCard } from "../../components/CategoryCard";
+import { Footer } from "../../components/Footer";
+import { Header } from "../../components/Header";
 import { RestaurantCard } from "../../components/RestaurantCard";
 import useForm from "../../hooks/useForm";
 import { useProtectedPage } from "../../hooks/useProtectedPage";
 import { useRequestData } from "../../hooks/useRequestData";
+import { goToLogin } from "../../routes/Coordinator";
 
 const Div = styled.div`
   display: grid;
@@ -22,14 +26,21 @@ const Div = styled.div`
 export default function HomePage() {
   useProtectedPage();
 
+  const navigate = useNavigate()
+
   const [category, setcategory] = useState(null);
 
   const { form, onChange } = useForm({ query: "" });
 
   const [data] = useRequestData("rappi4A/restaurants", []);
 
+  
+
   return (
     <div>
+
+      <Header page="home" />
+
       <span>
         <input
           id={"query"}
@@ -60,6 +71,8 @@ export default function HomePage() {
         .map((item) => {
           return <RestaurantCard restaurant={item} />;
         })}
+
+        <Footer page="home"/>
     </div>
   );
 }

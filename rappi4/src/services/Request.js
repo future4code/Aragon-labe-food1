@@ -55,7 +55,7 @@ export const requestAddress = (form, navigate) => {
 
     axios.put(`${BASE_URL}rappi4A/address`, body, HEADERS)
         .then((res) => {
-            localStorage.setItem("token-address", res.data.token);
+            localStorage.setItem("token", res.data.token);
             alert("Endereço cadastrado com sucesso!")
             goToFeed(navigate)
         })
@@ -63,5 +63,26 @@ export const requestAddress = (form, navigate) => {
             alert("Erro ao cadastrar endereço.")
             console.log(err.message)
         })
+}
 
+export const resquetsOrder = (productId, quantity, paymentMethod, restaurantId) => {
+    const body = {
+        products: [{
+            id: productId,
+            quantity: Number(quantity),
+        }, {
+            quantity: Number(quantity),
+            id: productId,
+        }],
+        paymentMethod: paymentMethod,
+    }
+
+    axios.post(`${BASE_URL}rappi4A/restaurants/${restaurantId}/order`, body, HEADERS)
+        .then((res) => {
+            alert("Pedido realizado com sucesso!")
+        })
+        .catch((err) => {
+            alert("Erro ao cofirmar pedido.")
+            console.log(err.message)
+        })
 }

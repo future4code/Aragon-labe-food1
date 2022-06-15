@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { CartPage } from "../pages/CartPage/CartPagee";
 import HomePage from "../pages/Home/HomePage";
 import LoginPage from "../pages/LoginPage/LoginPage";
 import PerfilPage from "../pages/PerfilPagee/PerfilPage";
@@ -18,6 +19,7 @@ export default function Router() {
         <Route path="/address" element={<RegistrationAddressPage />} />
         <Route path="/feed/restaurant/:restaurantId" element={<ResultPage />} />
         <Route path="/profile" element={<PerfilPage />} />
+        <Route path="/cart" element={<CartPage />} />
       </Routes>
     </BrowserRouter>
   );

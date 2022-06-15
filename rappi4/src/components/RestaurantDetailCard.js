@@ -1,10 +1,17 @@
-export const RestaurantDetailCard = (props) => {
-  const restaurant = props.detail.restaurant;
+import { useState } from "react";
+import { Header } from "./Header";
+import { ProductCard } from "./ProductCard";
 
-  console.log(props.detail);
+export const RestaurantDetailCard = (props) => {
+
+
+  const restaurant = props.detail.restaurant;
 
   return (
     <div>
+
+      <Header page="restaurant" />
+
       <img width={"50%"} src={restaurant?.logoUrl} />
       <p>{restaurant?.name}</p>
       <p>
@@ -16,21 +23,11 @@ export const RestaurantDetailCard = (props) => {
       <hr />
       {restaurant?.products.map((product) => {
         return (
-          <div>
-            <img width="30%" src={product.photoUrl} />
-            <p>{product.name}</p>
-            <p>{product.description}</p>
-            <p>
-              {product.price.toLocaleString("pt-br", {
-                style: "currency",
-                currency: "BRL",
-              })}
-            </p>
-            <button>Adicionar ao carrinho</button>
-            <hr />
-          </div>
+          <ProductCard product={product}/>
+         
         );
       })}
     </div>
   );
 };
+
