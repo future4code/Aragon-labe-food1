@@ -68,20 +68,20 @@ export const requestAddress = (form, navigate) => {
 };
 
 export const resquetsOrder = (
-  productId,
-  quantity,
+  product,
   paymentMethod,
-  restaurantId
+  restaurantId,
+  
 ) => {
   const body = {
     products: [
       {
-        id: productId,
-        quantity: Number(quantity),
+        id: product.id,
+        quantity: Number(product.quantity),
       },
       {
-        quantity: Number(quantity),
-        id: productId,
+        quantity: Number(product.quantity),
+        id: product.id,
       },
     ],
     paymentMethod: paymentMethod,

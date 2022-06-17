@@ -1,54 +1,81 @@
 import { useNavigate } from "react-router-dom";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import useForm from "../../hooks/useForm";
 import LogoGeral from "../../images/logoGeral.png";
 import { goToSignup } from "../../routes/Coordinator";
 import { requestLogin } from "../../services/Request";
+import { Avatar, Button, Container, CssBaseline, TextField, Toolbar, Typography } from "@mui/material";
+import { Box } from "@mui/system";
 
 export default function LoginPage() {
   const navigate = useNavigate();
-  const { form, onChange } = useForm({ email: "", passaword: "" });
+  const { form, onChange } = useForm({ email: "", password: "" });
 
   const login = (e) => {
     e.preventDefault();
     requestLogin(form, navigate);
   };
+  const theme = createTheme()
 
   return (
     <main>
-      <img src={LogoGeral} />
-      <span>Entrar</span>
+      
+      <ThemeProvider theme={theme}>
+        <Container component="main" maxWidth="xs">
+          <CssBaseline/>
 
-      <form onSubmit={login}>
-        <section>
-          <input
-            id="email"
-            placeholder="email@email.com"
-            name={"email"}
-            value={form.email}
-            onChange={onChange}
-            type={"email"}
-            required
-          />
-        </section>
+         <img src={LogoGeral} alt="Logo do Rappi4"         
+         />     
+          
+          <Box
+            sx={{
+              m:3,
+              display:"flex",
+              flexDirection: "column",
+              textAlign:"center",
+            }}>
+              <Typography component="h1" variant="h5" sx={{fontWeight:"bold"}}> Entrar</Typography>
+              <Box component="form" onSubmit={login} sx={{mt:1}}>
+                <TextField
+                  margin="normal"
+                  required
+                  id="email"
+                  label="Seu E-mail:"
+                  name="email"
+                  autoComplete="email"
+                  placeholder="email@email.com"
+                  fullWidth
+                  value={form.email}
+                  onChange={onChange}
+                  autoFocus
+                  />
 
-        <section>
-          <input
-            id="senha"
-            placeholder="minímo 6 caracteres"
-            name={"password"}
-            value={form.password}
-            onChange={onChange}
-            type={"password"}
-            required
-          />
-        </section>
+                  <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    name="password"
+                    label="Sua Senha: "
+                    type="password"
+                    id="senha"
+                    placeholder="minímo 6 caracteres"
+                    autoComplete="current-password"
+                    value={form.password}
+                    onChange={onChange}
+                    />
+                    <Button type="submit"
+                    fullWidth
+                    variant="contained"
+                    sx={{ mt: 3, mb: 2, bgcolor:"#E86E5A", color:"#000000" }}
 
-        <button type="submit">Entrar</button>
-      </form>
+                    >Entrar</Button>
 
-      <p onClick={() => goToSignup(navigate)}>
-        Não possui cadastro? Clique aqui.
-      </p>
+                    <Typography component="h3" sx={{fontWeight:"bold",}} onClick={() => goToSignup(navigate)}>
+                      Não possui cadastro? Clique aqui.</Typography>                                   
+              </Box>
+            </Box>
+        </Container>
+      </ThemeProvider>  
     </main>
   );
 }

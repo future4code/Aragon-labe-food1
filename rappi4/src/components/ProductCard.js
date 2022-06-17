@@ -17,7 +17,7 @@ const DivQuantidade = styled.div`
 `;
 
 export const ProductCard = (props) => {
-  const [quantity, setQuantity] = useState(null);
+  const [quantity, setQuantity] = useState(1);
 
   const params = useParams();
   const [divQuantity, setDivQuantity] = useState(false);
@@ -31,35 +31,20 @@ export const ProductCard = (props) => {
   };
 
 
-  const {getters} = useContext(GlobalContext);
+  const {setters, getters} = useContext(GlobalContext);
   
-  const { newListProducts, newListProducts2} = getters;
+  const { newListProducts } = getters;
 
-  const { setters } = useContext(GlobalContext);
+  const { setRestaurant } = setters;
 
-  const {
-    setIdRestaurant,
-    setIdProduct,
-    setQuantityProduct,
-    setProductName,
-    setProductPrice,
-    setProductImage,
-    setProductDescription,
-    setFrete
-  } = setters;
+
 
   const addProduct = () => {
-    alert("Deu certo");
-    setIdProduct(props.product.id);
-    setProductName(props.product.name);
-    setProductPrice(props.product.price);
-    setProductDescription(props.product.description);
-    setProductImage(props.product.photoUrl);
-    setIdRestaurant(params.restaurantId);
-    setQuantityProduct(quantity);
+    const newProduct = {...props.product, quantity:quantity}   
+    setRestaurant({restaurantId:params.restaurantId, frete:props.frete });
+    newListProducts(newProduct);
     setDivQuantity(!quantity);
-    setFrete(props.frete)
-    newListProducts();
+    alert("Deu certo"); 
   };
 
   return (
