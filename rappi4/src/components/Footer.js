@@ -32,11 +32,12 @@ const FooterStyled = styled.main`
 
 const ActiveOrder = styled.div`
   background-color: #e86e5a;
-  border: solid 1px black;
-  position: static;
+  position: fixed;
 
   z-index: 9999;
-  margin-bottom: 50px;
+  margin-bottom: 130px;
+  
+  
 `;
 
 export const Footer = (props) => {
@@ -67,8 +68,9 @@ export const Footer = (props) => {
 
   return (
     <div>
-      {props.page === "home" ? renderActiveOrder() : <></>}
+      
       <FooterStyled>
+      {order !== null ? renderActiveOrder() : <></>}
         <div>
           {props.page === "home" ? (
             <>

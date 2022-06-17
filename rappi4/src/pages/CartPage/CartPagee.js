@@ -19,29 +19,23 @@ export const CartPage = () => {
 
   const { states, setters } = useContext(GlobalContext);
 
-  const {
-    idRestaurant,
-    idProduct,
-    quantityProduct,
-    productsList,
-    frete
-  } = states;
+  const { productsList, restaurant}  = states;
 
   const onChangeConfirm = (e) => {
     setPaymentMethod(e.target.value);
   };
 
   const confirmOrder = () => {
-    resquetsOrder(idProduct, quantityProduct, paymentMethod, idRestaurant);
+    resquetsOrder(productsList, paymentMethod, restaurant.restaurantId );
   };
 
   const valueTotal = () => {
     let value = 0
     for (let elemento of productsList) {
-      value += elemento?.productPrice * elemento?.quantityProduct
+      value += elemento?.price * elemento?.quantity
     }
 
-    const newValue = value + frete
+    const newValue = value + restaurant?.frete
     return newValue.toLocaleString("pt-br", {
       style: "currency",
       currency: "BRL",
@@ -49,7 +43,7 @@ export const CartPage = () => {
 
   }
 
-  console.log(productsList)
+  console.log(restaurant)
   return (
     <SectionCart>
       <Header page="cart" />
@@ -60,18 +54,18 @@ export const CartPage = () => {
       {productsList?.map((product) => {
         return (
           <section>
-            <img src={product.productImage} width="20%" />
+            <img src={product.photoUrl} width="20%" />
             <p>
-              {product.productName} - {product.quantityProduct}
+              {product.name} - {product.quantity}
             </p>
-            <p>{product.productDescription}</p>
-            <p>R$ {product.productPrice}</p>
+            <p>{product.description}</p>
+            <p>R$ {product.price}</p>
           </section>
         )
       })}
 
 
-      <p>Frete: {frete.toLocaleString("pt-br", {
+      <p>Frete: {restaurant?.frete.toLocaleString("pt-br", {
         style: "currency",
         currency: "BRL",
       })}</p>
