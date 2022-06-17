@@ -26,7 +26,7 @@ const Div = styled.div`
 export default function HomePage() {
   useProtectedPage();
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [category, setcategory] = useState(null);
 
@@ -34,11 +34,8 @@ export default function HomePage() {
 
   const [data] = useRequestData("rappi4A/restaurants", []);
 
-  
-
   return (
     <div>
-
       <Header page="home" />
 
       <span>
@@ -54,7 +51,7 @@ export default function HomePage() {
         {data.restaurants?.map((item) => {
           return (
             <div onClick={() => setcategory(item.category)}>
-              <CategoryCard category={item.category} />
+              <CategoryCard key={item.category} category={item.category} />
             </div>
           );
         })}
@@ -71,8 +68,7 @@ export default function HomePage() {
         .map((item) => {
           return <RestaurantCard restaurant={item} />;
         })}
-
-        <Footer page="home"/>
+      <Footer page="home" />
     </div>
   );
 }

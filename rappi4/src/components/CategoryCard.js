@@ -5,7 +5,7 @@ const Div = styled.div`
 `;
 export const CategoryCard = (props) => {
   return (
-    <Div>
+    <Div key={props.category}>
       <p>{props.category}</p>
     </Div>
   );
