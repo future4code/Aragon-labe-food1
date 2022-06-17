@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { GlobalContext } from "../Global/GlobalContext";
 import { Header } from "./Header";
 import { ProductCard } from "./ProductCard";
 
@@ -6,6 +7,7 @@ export const RestaurantDetailCard = (props) => {
 
 
   const restaurant = props.detail.restaurant;
+
 
   return (
     <div>
@@ -23,7 +25,7 @@ export const RestaurantDetailCard = (props) => {
       <hr />
       {restaurant?.products.map((product) => {
         return (
-          <ProductCard product={product}/>
+          <ProductCard  frete={restaurant.shipping} product={product}/>
          
         );
       })}

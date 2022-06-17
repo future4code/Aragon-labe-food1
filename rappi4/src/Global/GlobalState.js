@@ -9,6 +9,42 @@ export const GlobalState = (props) => {
   const [productPrice, setProductPrice] = useState("")
   const [productDescription, setProductDescription] = useState("")
   const [productImage, setProductImage] = useState("")
+  const [productsList, setProductsList] = useState([])
+  const [frete, setFrete] = useState("")
+
+  const product = {
+    productDescription,
+    productImage,
+    productName,
+    productPrice,
+    quantityProduct,
+  }
+
+  
+  const newListProducts = () => {
+
+    const list = product
+    const newList = [...productsList, list ]
+
+    setProductsList(newList)
+  }
+
+  const newListProducts2 = () => {
+    const indiceCart = 
+    productsList.findIndex((product)=>{
+      return product.productName === productsList.productName
+    })
+
+    const newCart = [...productsList] 
+  
+    if(indiceCart === -1){
+      const newProduct = {...product, quantityProduct: 1} 
+      newCart.push(newProduct)
+    } else {
+      newCart [indiceCart].quantityProduct ++
+    }
+    setProductsList({productsList: newCart})
+  }
   
   const setters = {
     setIdRestaurant,
@@ -17,7 +53,9 @@ export const GlobalState = (props) => {
     setProductName,
     setProductPrice,
     setProductDescription,
-    setProductImage
+    setProductImage,
+    setProductsList,
+    setFrete
   }
 
   const states = {
@@ -27,11 +65,18 @@ export const GlobalState = (props) => {
     productName,
     productPrice,
     productDescription,
-    productImage
+    productImage,
+    productsList,
+    frete
+  }
+
+  const getters = {
+    newListProducts,
+    newListProducts2
   }
 
 
-  return <GlobalContext.Provider value={{ setters, states }}>
+  return <GlobalContext.Provider value={{ setters, states , getters}}>
     {props.children}
   </GlobalContext.Provider>;
 };

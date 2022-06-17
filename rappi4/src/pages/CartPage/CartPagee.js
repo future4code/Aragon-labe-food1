@@ -4,6 +4,13 @@ import { Header } from "../../components/Header";
 import { GlobalContext } from "../../Global/GlobalContext";
 import { useRequestData } from "../../hooks/useRequestData";
 import { resquetsOrder } from "../../services/Request";
+import styled from "styled-components";
+
+
+const SectionCart = styled.section`
+
+  height: 120vh;
+`
 
 export const CartPage = () => {
   const [profile] = useRequestData("rappi4A/profile", {});
@@ -16,10 +23,8 @@ export const CartPage = () => {
     idRestaurant,
     idProduct,
     quantityProduct,
-    productName,
-    productPrice,
-    productDescription,
-    productImage,
+    productsList,
+    frete
   } = states;
 
   const onChangeConfirm = (e) => {
@@ -30,23 +35,47 @@ export const CartPage = () => {
     resquetsOrder(idProduct, quantityProduct, paymentMethod, idRestaurant);
   };
 
+  const valueTotal = () => {
+    let value = 0
+    for (let elemento of productsList) {
+      value += elemento?.productPrice * elemento?.quantityProduct
+    }
+
+    const newValue = value + frete
+    return newValue.toLocaleString("pt-br", {
+      style: "currency",
+      currency: "BRL",
+    });
+
+  }
+
+  console.log(productsList)
   return (
-    <section>
+    <SectionCart>
       <Header page="cart" />
       <p>Endereço de entrega:</p>
       <span>{profile.user?.address}</span>
 
       <hr />
+      {productsList?.map((product) => {
+        return (
+          <section>
+            <img src={product.productImage} width="20%" />
+            <p>
+              {product.productName} - {product.quantityProduct}
+            </p>
+            <p>{product.productDescription}</p>
+            <p>R$ {product.productPrice}</p>
+          </section>
+        )
+      })}
 
-      <img src={productImage} width="20%" />
-      <p>
-        {productName} - {quantityProduct}
-      </p>
-      <p>{productDescription}</p>
-      <p>R$ {productPrice}</p>
 
-      <p>Frete:</p>
-      <p>SUBTOTAL: </p>
+      <p>Frete: {frete.toLocaleString("pt-br", {
+        style: "currency",
+        currency: "BRL",
+      })}</p>
+      <p>SUBTOTAL: {valueTotal()}</p>
 
       <h4>Forma de pagamento</h4>
       <hr />
@@ -74,13 +103,9 @@ export const CartPage = () => {
       <button onClick={confirmOrder}>Confirmar</button>
 
       <Footer page="cart" />
-    </section>
+    </SectionCart>
   );
 };
 
-{
-  /* <select>
-                <option>Débito</option>
-                <option>Cartão de crédito</option>
-            </select> */
-}
+
+
