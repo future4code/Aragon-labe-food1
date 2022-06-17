@@ -30,6 +30,11 @@ export const ProductCard = (props) => {
     setQuantity(e.target.value);
   };
 
+
+  const {getters} = useContext(GlobalContext);
+  
+  const { newListProducts, newListProducts2} = getters;
+
   const { setters } = useContext(GlobalContext);
 
   const {
@@ -40,6 +45,7 @@ export const ProductCard = (props) => {
     setProductPrice,
     setProductImage,
     setProductDescription,
+    setFrete
   } = setters;
 
   const addProduct = () => {
@@ -51,6 +57,9 @@ export const ProductCard = (props) => {
     setProductImage(props.product.photoUrl);
     setIdRestaurant(params.restaurantId);
     setQuantityProduct(quantity);
+    setDivQuantity(!quantity);
+    setFrete(props.frete)
+    newListProducts();
   };
 
   return (
