@@ -6,12 +6,15 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 
+
+
+
 export const RestaurantCard = (props) => {
   const navigate = useNavigate();
 
   return (
 
-    <article>
+    <main>
       <Box
         sx={{
           mt: 2,
@@ -43,6 +46,6 @@ export const RestaurantCard = (props) => {
           </CardContent>
         </Card>
       </Box>
-    </article>
+    </main>
   );
 };

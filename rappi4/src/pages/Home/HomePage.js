@@ -28,6 +28,11 @@ const Div = styled.div`
   }
 `;
 
+const ContainerHome = styled.div`
+  font-family: 'Roboto', sans-serif;
+`
+
+
 export default function HomePage() {
   useProtectedPage();
 
@@ -40,7 +45,7 @@ export default function HomePage() {
   const [data] = useRequestData("rappi4A/restaurants", []);
 
   return (
-    <div>
+    <ContainerHome>
       <Header page="home" />
       <Container component="main" maxWidth="xs">
       <Box sx={{ '& > :not(style)': { mr: 2, mt:2, mb:3 } }}>
@@ -84,6 +89,6 @@ export default function HomePage() {
           return <RestaurantCard restaurant={item} />;
         })}
       <Footer page="home" />
-    </div>
+    </ContainerHome>
   );
 }

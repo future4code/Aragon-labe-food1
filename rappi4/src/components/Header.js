@@ -8,19 +8,22 @@ const SectionHeaders = styled.header`
   text-align: center;
 `;
 const SectionHeaderHome = styled.section`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  text-align:center;
 `;
 
 const SectionHearderRestaurant = styled.section`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin: 0 5% 0;
 
   img {
     width: 25px;
     height: 25px;
+  }
+
+  p{
+    color:gray;
   }
 `;
 
@@ -41,7 +44,6 @@ export const Header = (props) => {
           <header>
             <SectionHeaderHome>
               <h3>Rappi4</h3>
-              <button onClick={logout}>logout</button>
             </SectionHeaderHome>
             <hr />
           </header>
@@ -50,15 +52,19 @@ export const Header = (props) => {
         return (
           <SectionHeaders>
             <h3>Meu carrinho</h3>
-            <hr />
+
           </SectionHeaders>
         );
       case "profile":
         return (
-          <SectionHeaders>
-            <h3>Meu perfil</h3>
+          <header>
+            <SectionHearderRestaurant>
+              <h3>Meu perfil</h3>
+              <p onClick={logout}>logout</p>
+
+            </SectionHearderRestaurant>
             <hr />
-          </SectionHeaders>
+          </header>
         );
       case "editAddress":
         return (
@@ -70,6 +76,32 @@ export const Header = (props) => {
                 alt="Ícone para voltar a pagina anterior"
               />
               <h3>Endereço</h3>
+            </SectionHearderRestaurant>
+            <hr />
+          </header>
+        );
+      case "signup":
+        return (
+          <header>
+            <SectionHearderRestaurant>
+              <img
+                src={Back}
+                onClick={() => goToBack(navigate)}
+                alt="Ícone para voltar a pagina anterior"
+              />
+            </SectionHearderRestaurant>
+            <hr />
+          </header>
+        );
+      case "addresspage":
+        return (
+          <header>
+            <SectionHearderRestaurant>
+              <img
+                src={Back}
+                onClick={() => goToBack(navigate)}
+                alt="Ícone para voltar a pagina anterior"
+              />
             </SectionHearderRestaurant>
             <hr />
           </header>
@@ -102,6 +134,10 @@ export const Header = (props) => {
             <hr />
           </header>
         );
+      default:
+        return (
+          <></>
+        )
     }
   };
 

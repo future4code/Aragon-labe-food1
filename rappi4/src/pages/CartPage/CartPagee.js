@@ -5,11 +5,62 @@ import { GlobalContext } from "../../Global/GlobalContext";
 import { useRequestData } from "../../hooks/useRequestData";
 import { resquetsOrder } from "../../services/Request";
 import styled from "styled-components";
+import { Button } from "@mui/material";
 
+const AddressDetails = styled.section` 
+  width: 360px;
+  height: 76px;
+  padding: 16px;
+  background-color: #eee;
+
+  p{
+    color: #b8b8b8;
+  }
+
+  span{
+    font-size: 16px;
+    font-weight: bold;
+  }
+`
 
 const SectionCart = styled.section`
-
+  font-family: 'Roboto', sans-serif;
   height: 120vh;
+
+  button{
+  width: 328px;
+  height: 42px;
+  padding: 12px 16px;
+  border-radius: 2px;
+  background-color: #E86E5A;
+  font-size: 16px;
+  
+  }
+
+`
+
+const PaymentMethodSection = styled.section` 
+  display:grid;
+
+  section{
+    margin-top:10%;
+    text-align:center;
+  }
+
+  label{
+    margin-left: 5%;
+  }
+
+`
+
+const SectionTitlePayment = styled.section`
+  margin:5%;
+
+`
+
+const DetailsOrders = styled.div`
+ margin:5%;
+
 `
 
 export const CartPage = () => {
@@ -19,14 +70,14 @@ export const CartPage = () => {
 
   const { states, setters } = useContext(GlobalContext);
 
-  const { productsList, restaurant}  = states;
+  const { productsList, restaurant } = states;
 
   const onChangeConfirm = (e) => {
     setPaymentMethod(e.target.value);
   };
 
   const confirmOrder = () => {
-    resquetsOrder(productsList, paymentMethod, restaurant.restaurantId );
+    resquetsOrder(productsList, paymentMethod, restaurant.restaurantId);
   };
 
   const valueTotal = () => {
@@ -43,58 +94,68 @@ export const CartPage = () => {
 
   }
 
-  console.log(restaurant)
+  console.log(productsList)
   return (
     <SectionCart>
       <Header page="cart" />
-      <p>Endereço de entrega:</p>
-      <span>{profile.user?.address}</span>
+      <AddressDetails>
+        <p>Endereço de entrega:</p>
+        <span>{profile.user?.address}</span>
+      </AddressDetails>
 
-      <hr />
-      {productsList?.map((product) => {
-        return (
-          <section>
-            <img src={product.photoUrl} width="20%" />
-            <p>
-              {product.name} - {product.quantity}
-            </p>
-            <p>{product.description}</p>
-            <p>R$ {product.price}</p>
-          </section>
-        )
-      })}
+      <DetailsOrders>
+        {productsList?.map((product) => {
+          return (
+            <section>
+              <img src={product.photoUrl} width="20%" />
+              <p>
+                {product.name} - {product.quantity}
+              </p>
+              <p>{product.description}</p>
+              <p>R$ {product.price}</p>
+            </section>
+          )
+        })}
 
 
-      <p>Frete: {restaurant?.frete.toLocaleString("pt-br", {
-        style: "currency",
-        currency: "BRL",
-      })}</p>
-      <p>SUBTOTAL: {valueTotal()}</p>
+        <p>Frete: {restaurant?.frete.toLocaleString("pt-br", {
+          style: "currency",
+          currency: "BRL",
+        })}</p>
+        <p>SUBTOTAL: {valueTotal()}</p>
+      </DetailsOrders>
 
-      <h4>Forma de pagamento</h4>
-      <hr />
+      <SectionTitlePayment>
+        <h4>Forma de pagamento</h4>
+        <hr />
+      </SectionTitlePayment>
+      <PaymentMethodSection>
 
-      <label>
-        <input
-          type="radio"
-          name="pagamento"
-          value="money"
-          onChange={onChangeConfirm}
-        />
-        Dinheiro
-      </label>
+        <label>
+          <input
+            type="radio"
+            name="pagamento"
+            value="money"
+            onChange={onChangeConfirm}
+          />
+          Dinheiro
+        </label>
 
-      <label>
-        <input
-          type="radio"
-          name="pagamento"
-          value="creditcard"
-          onChange={onChangeConfirm}
-        />
-        Cartão de crédito
-      </label>
+        <label>
+          <input
+            type="radio"
+            name="pagamento"
+            value="creditcard"
+            onChange={onChangeConfirm}
+          />
+          Cartão de crédito
+        </label>
 
-      <button onClick={confirmOrder}>Confirmar</button>
+        <section>
+          <button onClick={confirmOrder}>Confirmar</button>
+        </section>
+
+      </PaymentMethodSection>
 
       <Footer page="cart" />
     </SectionCart>

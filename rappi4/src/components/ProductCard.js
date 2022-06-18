@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { GlobalContext } from "../Global/GlobalContext";
 import useForm from "../hooks/useForm";
+import Button from '@mui/material/Button';
 
 const DivQuantidade = styled.div`
   position: absolute;
@@ -14,7 +15,42 @@ const DivQuantidade = styled.div`
   margin: 27px 16px 29px;
   padding: 11px 0 68px;
   background-color: #fff;
+  display:grid;
+  grid-template-columns:1fr;
+  justify-items:center;
+  align-items:center;
+
 `;
+
+const CardProduct = styled.div` 
+  border: 1px solid gray;
+  border-radius: 10px;
+  margin-bottom:2%;
+  display:flex;
+  flex-direction: row;
+  justify-content: flex-start;
+
+`
+
+const ImageProduct = styled.img` 
+  height:100%;
+  width:30%;
+  border-radius: 10px 0 0 10px;
+
+`
+
+const DescriptionProduct = styled.section`
+  h3{
+    color:#e86e5a;
+  }
+
+  p{
+    color:#b8b8b8;
+  }
+
+`
+
+
 
 export const ProductCard = (props) => {
   const [quantity, setQuantity] = useState(1);
@@ -31,8 +67,8 @@ export const ProductCard = (props) => {
   };
 
 
-  const {setters, getters} = useContext(GlobalContext);
-  
+  const { setters, getters } = useContext(GlobalContext);
+
   const { newListProducts } = getters;
 
   const { setRestaurant } = setters;
@@ -40,25 +76,30 @@ export const ProductCard = (props) => {
 
 
   const addProduct = () => {
-    const newProduct = {...props.product, quantity:quantity}   
-    setRestaurant({restaurantId:params.restaurantId, frete:props.frete });
+    const newProduct = { ...props.product, quantity: quantity }
+    setRestaurant({ restaurantId: params.restaurantId, frete: props.frete });
     newListProducts(newProduct);
     setDivQuantity(!quantity);
-    alert("Deu certo"); 
+    alert("Pedido adicionado!");
   };
 
   return (
-    <div key={props.product.name}>
-      <img width="30%" src={props.product.photoUrl} />
-      <p>{props.product.name}</p>
-      <p>{props.product.description}</p>
-      <p>
-        {props.product.price.toLocaleString("pt-br", {
-          style: "currency",
-          currency: "BRL",
-        })}
-      </p>
-      <button onClick={divQuantidade}>Adicionar</button>
+    <CardProduct key={props.product.name}>
+      <section>
+        <ImageProduct width="30%" src={props.product.photoUrl} />
+      </section>
+
+      <DescriptionProduct>
+        <h3>{props.product.name}</h3>
+        <p>{props.product.description}</p>
+        <h4>
+          {props.product.price.toLocaleString("pt-br", {
+            style: "currency",
+            currency: "BRL",
+          })}
+        </h4>
+        <button onClick={divQuantidade}>Adicionar</button>
+      </DescriptionProduct>
       {divQuantity === true ? (
         <DivQuantidade>
           <p>Selecione a quantidade desejada</p>
@@ -68,12 +109,13 @@ export const ProductCard = (props) => {
             value={quantity}
             onChange={onChangeQuantity}
           />
-          <button onClick={addProduct}>Adicionar ao carrinho</button>
+          <section>
+            <Button onClick={addProduct} variant="text">Adicionar ao carrinho</Button>
+          </section>
         </DivQuantidade>
       ) : (
         <></>
       )}
-      <hr />
-    </div>
+    </CardProduct>
   );
 };
