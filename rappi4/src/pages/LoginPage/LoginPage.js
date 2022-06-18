@@ -34,7 +34,7 @@ export default function LoginPage() {
               flexDirection: "column",
               textAlign:"center",
             }}>
-              <Typography component="h1" variant="h5" sx={{fontWeight:"bold"}}> Entrar</Typography>
+              <Typography sx={{fontSize:"16px", letterSpacing:"0.39px"}}> Entrar</Typography>
               <Box component="form" onSubmit={login} sx={{mt:1}}>
                 <TextField
                   margin="normal"

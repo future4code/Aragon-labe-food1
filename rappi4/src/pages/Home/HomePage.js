@@ -9,6 +9,11 @@ import useForm from "../../hooks/useForm";
 import { useProtectedPage } from "../../hooks/useProtectedPage";
 import { useRequestData } from "../../hooks/useRequestData";
 import { goToLogin } from "../../routes/Coordinator";
+import Box from '@mui/material/Box';
+import InputAdornment from '@mui/material/InputAdornment';
+import TextField from '@mui/material/TextField';
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
+import { Container } from "@mui/material";
 
 const Div = styled.div`
   display: grid;
@@ -37,16 +42,26 @@ export default function HomePage() {
   return (
     <div>
       <Header page="home" />
-
-      <span>
-        <input
-          id={"query"}
-          placeholder="Restaurante"
-          name={"query"}
-          value={form.query}
-          onChange={onChange}
+      <Container component="main" maxWidth="xs">
+      <Box sx={{ '& > :not(style)': { mr: 2, mt:2, mb:3 } }}>
+      <TextField
+         id={"query"}
+         name={"query"}
+         value={form.query}
+         onChange={onChange}
+         label="Restaurante"
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <SearchOutlinedIcon />
+              </InputAdornment>
+            ),
+          }}
+          variant="outlined" fullWidth
         />
-      </span>
+      </Box>
+      </Container>
+
       <Div>
         {data.restaurants?.map((item) => {
           return (
@@ -56,7 +71,7 @@ export default function HomePage() {
           );
         })}
       </Div>
-      <hr />
+     
       {data.restaurants
         ?.filter((item) => {
           if (category === null) return item.id >= 1;

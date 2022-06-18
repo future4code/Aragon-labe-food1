@@ -4,6 +4,9 @@ import { useUnprotectedPage } from "../../hooks/useUnprotectedPage";
 import LogoGeral from "../../images/logoGeral.png";
 import { goToLogin } from "../../routes/Coordinator";
 import { requestSignup } from "../../services/Request";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import {Button, CssBaseline, Grid, TextField,Typography} from "@mui/material";
+import { Box, Container } from "@mui/system";
 
 export default function SignupPage() {
   useUnprotectedPage();
@@ -31,75 +34,120 @@ export default function SignupPage() {
       .replace(/(-\d{2})\d+?$/, "$1");
   };
 
+  const theme = createTheme()
+
   return (
     <main>
-      <img src={LogoGeral} />
-      <form onSubmit={createAccount}>
-        <span>Cadastrar</span>
+       <img src={LogoGeral} alt="Logo do Rappi4"/>
+      <ThemeProvider theme={theme}>
+        <Container component="main" maxWidth="xs">
+          <CssBaseline/>
+          <Box
+            sx={{
+              margin: 6,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}>
+              <Typography sx={{
+                fontSize:"16px", letterSpacing:"0.39px"}}>                
+                Cadastrar</Typography>
 
-        <section>
-          <input
-            id="nome"
-            placeholder="Nome e Sobrenome"
-            name={"name"}
-            value={form.name}
-            onChange={onChange}
-            required
-          />
-        </section>
+                <Box component="form" noValidate onSubmit={createAccount} sx={{ mt: 3, borderRadius:10 }}>
+                <Grid container spacing={1} sx={{}}>
+                  <Grid item xs={12}>
+                    <TextField
+                      required
+                      fullWidth
+                      id={"name"}
+                      name={"name"}
+                      value={form.name}
+                      onChange={onChange}                    
+                      label={"Seu nome"}
+                      placeholder="Nome e Sobrenome"
+                      autoFocus
+                    />
+                  </Grid>
 
-        <section>
-          <input
-            id="email"
-            placeholder="email@email.com"
-            name={"email"}
-            value={form.email}
-            onChange={onChange}
-            type={"email"}
-            required
-          />
-        </section>
+                  <Grid item xs={12}>
+                    <TextField
+                      required
+                      fullWidth
+                      id={"email"}
+                      type={"email"}
+                      name={"email"}
+                      value={form.email}
+                      onChange={onChange}
+                      label={"Seu E-mail"}
+                      placeholder="email@email.com"
+                    />
+                  </Grid>
 
-        <section>
-          <input
-            id="cpf"
-            placeholder="000.000.000-00"
-            name={"cpf"}
-            value={cpfConvert(form.cpf)}
-            onChange={onChange}
-            required
-          />
-        </section>
+                  <Grid item xs={12}>
+                    <TextField
+                       required
+                       fullWidth
+                       id="cpf"
+                       label={"Seu CPF"}
+                       name={"cpf"}
+                       placeholder="000.000.000-00"
+                       value={cpfConvert(form.cpf)}
+                       onChange={onChange}
+                       />
+                  </Grid>
 
-        <section>
-          <input
-            id="senha"
-            placeholder="minímo de 6 caracteres"
-            name={"password"}
-            type={"password"}
-            pattern={"^.{6,8}$"}
-            title={"a senha deve ter no mínimo 6 e no máximo 8 caracteres"}
-            required
-          />
-        </section>
+                  <Grid item xs={12}>
+                    <TextField
+                      required
+                      fullWidth
+                      id="senha"
+                      placeholder="minímo de 6 caracteres"
+                      name={"password"}
+                      type={"password"}
+                      pattern={"^.{6,8}$"}
+                      title={"a senha deve ter no mínimo 6 e no máximo 8 caracteres"}
+                      label={"Sua Senha"}
+                    />
+                    </Grid>
 
-        <section>
-          <input
-            id="confirmaSenha"
-            placeholder="Confirma a senha anterior"
-            name={"password"}
-            value={form.password}
-            onChange={onChange}
-            type={"password"}
-            pattern={"^.{6,8}$"}
-            title={"a senha deve ter no mínimo 8 e no máximo 30 caracteres"}
-            required
-          />
-        </section>
+                    <Grid item xs={12}>
+                      <TextField
+                        required
+                        fullWidth
+                        id="confirmaSenha"
+                        placeholder="Confirma a senha anterior"
+                        name={"password"}
+                        value={form.password}
+                        onChange={onChange}
+                        type={"password"}
+                        pattern={"^.{6,8}$"}
+                        title={"a senha deve ter no mínimo 8 e no máximo 30 caracteres"}
+                        />
+                    </Grid>
+                  </Grid>
 
-        <button type={"submit"}>Criar</button>
-      </form>
-      <button onClick={() => goToLogin(navigate)}> Voltar</button>
+                  <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    sx={{ mt: 4, mb: 3, bgcolor:"#E86E5A", color:"#000000"}}
+                    
+                  >
+                    Criar
+                  </Button>
+
+                  <Button
+                    type="onClick"
+                    fullWidth
+                    variant="contained"                   
+                    onClick={() => goToLogin(navigate)}
+                  >
+                    Voltar
+                  </Button>
+              </Box>
+            </Box>
+          </Container>
+        </ThemeProvider>
     </main>
   );
-}
+} 

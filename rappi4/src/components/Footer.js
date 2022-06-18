@@ -33,7 +33,6 @@ const FooterStyled = styled.main`
 const ActiveOrder = styled.div`
   background-color: #e86e5a;
   position: fixed;
-
   z-index: 9999;
   margin-bottom: 130px;
   
