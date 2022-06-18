@@ -7,6 +7,9 @@
 ## Link Surge 
 https://projeto-rappi4a.surge.sh/ - Entrega 17/06
 
+login: lucasmacedo@msn.com
+senha: 12345678
+
 ## Autores
 - Carolini Constantino 
 - Larissa de Castro
