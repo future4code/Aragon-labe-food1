@@ -67,6 +67,30 @@ export const requestAddress = (form, navigate) => {
     });
 };
 
+export const requestEditAddress = (form, navigate) => {
+  const body = {
+    street: form.street,
+    number: form.number,
+    neighbourhood: form.neighbourhood,
+    city: form.city,
+    state: form.state,
+    complement: form.complement,
+  };
+
+  axios
+    .put(`${BASE_URL}rappi4A/address`, body, HEADERS)
+    .then((res) => {
+      localStorage.setItem("token", res.data.token);
+      alert("Endereço alterado com sucesso!");
+      goToProfile(navigate);
+    })
+    .catch((err) => {
+      alert("Erro ao cadastrar endereço.");
+      console.log(err.message);
+    });
+};
+
+
 export const resquetsOrder = (
   product,
   paymentMethod,
@@ -76,12 +100,20 @@ export const resquetsOrder = (
   const body = {
     products: [
       {
-        id: product.id,
+        id: product[0].id,
         quantity: Number(product.quantity),
       },
       {
         quantity: Number(product.quantity),
-        id: product.id,
+        id: product[1].id,
+      },
+      {
+        quantity: Number(product.quantity),
+        id: product[2].id,
+      },
+      {
+        quantity: Number(product.quantity),
+        id: product[3].id,
       },
     ],
     paymentMethod: paymentMethod,
@@ -110,6 +142,7 @@ export const requestUpDateProfile = (form, navigate) => {
     .then((res) => {
       localStorage.setItem("token", res.data.token);
       alert("Perfil alterado com sucesso!");
+      goToProfile(navigate)
     })
     .catch((err) => {
       alert("Erro ao alterar perfil.");

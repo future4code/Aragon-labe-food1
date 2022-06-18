@@ -1,3 +1,21 @@
+import styled from "styled-components";
+
+const CardOrder = styled.section` 
+    border-radius: 6px;
+    border: 1px solid #b8b8b8;
+    margin-bottom: 5%;
+    padding: 5% 0 0 5%;
+
+    p{
+        font-size: 80%;
+    }
+
+    span{
+        color:#e86e5a;
+    }
+
+`
+
 
 export const OrdersHistoryCard = (props) => {
 
@@ -17,29 +35,15 @@ export const OrdersHistoryCard = (props) => {
         <div>
             {orders?.map((order) => {
         return (
-            <section key={order.restaurantName}>
+            <CardOrder key={order.restaurantName}>
                 <span>{order.restaurantName}</span>
                 <br/>
-                <span>{converterData(order.createdAt)}</span>
-                <br/>
-                <span>SUBTOTAL R${order.totalPrice}</span>
-                <hr/>
-            </section>
+                <p>{converterData(order.createdAt)}</p>
+                <h4>SUBTOTAL R${order.totalPrice}</h4>
+            </CardOrder>
         )
     })}
         </div>
     )
 }
 
-{/* <div>
-    {orders.map((order) => {
-        return (
-            <section>
-                <span>{order.restaurantName}</span>
-                <span>{order.createdAt}</span>
-                <span>SUBTOTAL R${order.totalPrice}</span>
-            </section>
-        )
-    })}
-
-</div> */}

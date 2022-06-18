@@ -6,6 +6,22 @@ import { goToSignup } from "../../routes/Coordinator";
 import { requestLogin } from "../../services/Request";
 import { Avatar, Button, Container, CssBaseline, TextField, Toolbar, Typography } from "@mui/material";
 import { Box } from "@mui/system";
+import styled from "styled-components"
+
+const ImageLogo = styled.img` 
+  width: 104px;
+  height: 58px;
+
+`
+
+const ContainerLogin = styled.main` 
+  display:grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  margin-top:20%;
+`
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -18,13 +34,13 @@ export default function LoginPage() {
   const theme = createTheme()
 
   return (
-    <main>
+    <ContainerLogin>
       
       <ThemeProvider theme={theme}>
         <Container component="main" maxWidth="xs">
           <CssBaseline/>
 
-         <img src={LogoGeral} alt="Logo do Rappi4"         
+         <ImageLogo src={LogoGeral} alt="Logo do Rappi4"         
          />     
           
           <Box
@@ -76,6 +92,6 @@ export default function LoginPage() {
             </Box>
         </Container>
       </ThemeProvider>  
-    </main>
+    </ContainerLogin>
   );
 }

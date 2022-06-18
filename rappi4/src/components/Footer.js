@@ -8,6 +8,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { goToCart, goToFeed, goToProfile } from "../routes/Coordinator";
 import { useRequestData } from "../hooks/useRequestData";
+import Relogio from "../images/relogio.png";
 
 const FooterStyled = styled.main`
   display: flex;
@@ -34,9 +35,13 @@ const ActiveOrder = styled.div`
   background-color: #e86e5a;
   position: fixed;
   z-index: 9999;
-  margin-bottom: 130px;
-  
-  
+  margin-bottom: 170px;
+  display:flex;
+
+  p{
+    color:white;
+  }
+
 `;
 
 export const Footer = (props) => {
@@ -46,12 +51,17 @@ export const Footer = (props) => {
 
   const activeOrder = order.order;
 
+  console.log(order)
   const renderActiveOrder = () => {
     if (order !== null) {
       return (
         <ActiveOrder>
+          <section>
+            <img src={Relogio} />
+          </section>
+          <section>
           <p>Pedido em andamento</p>
-          <p>{activeOrder?.restaurantName}</p>
+          <span>{activeOrder?.restaurantName}</span>
           <h3>
             {" "}
             SUBTOTAL:
@@ -60,8 +70,12 @@ export const Footer = (props) => {
               currency: "BRL",
             })}
           </h3>
+          </section>
+          
         </ActiveOrder>
       );
+    } else {
+      return <></>
     }
   };
 
@@ -69,10 +83,12 @@ export const Footer = (props) => {
     <div>
       
       <FooterStyled>
-      {order !== null ? renderActiveOrder() : <></>}
+      
         <div>
+        
           {props.page === "home" ? (
             <>
+            {renderActiveOrder()}
               <section>
                 <img
                   src={Home}
