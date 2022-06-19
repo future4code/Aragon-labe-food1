@@ -5,7 +5,7 @@
 - https://scene.zeplin.io/project/5dd5ae92669af1bc817c8359
 
 ## Link Surge 
-https://projeto-rappi4a.surge.sh/ - Entrega 17/06
+https://general-fight.surge.sh/login - Entrega 17/06
 
 login: lucasmacedo@msn.com
 senha: 12345678
