@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { goToCart, goToFeed, goToProfile } from "../routes/Coordinator";
 import { useRequestData } from "../hooks/useRequestData";
 import Relogio from "../images/relogio.png";
+import { ConstructionOutlined } from "@mui/icons-material";
 
 const FooterStyled = styled.main`
   display: flex;
@@ -36,12 +37,11 @@ const ActiveOrder = styled.div`
   position: fixed;
   z-index: 9999;
   margin-bottom: 170px;
-  display:flex;
+  display: flex;
 
-  p{
-    color:white;
+  p {
+    color: white;
   }
-
 `;
 
 export const Footer = (props) => {
@@ -51,44 +51,38 @@ export const Footer = (props) => {
 
   const activeOrder = order.order;
 
-  console.log(order)
   const renderActiveOrder = () => {
-    if (order !== null) {
+    if (activeOrder === null) {
+      return <></>;
+    } else {
       return (
         <ActiveOrder>
           <section>
             <img src={Relogio} />
           </section>
           <section>
-          <p>Pedido em andamento</p>
-          <span>{activeOrder?.restaurantName}</span>
-          <h3>
-            {" "}
-            SUBTOTAL:
-            {activeOrder?.totalPrice.toLocaleString("pt-br", {
-              style: "currency",
-              currency: "BRL",
-            })}
-          </h3>
+            <p>Pedido em andamento</p>
+            <span>{activeOrder?.restaurantName}</span>
+            <h3>
+              {" "}
+              SUBTOTAL:
+              {activeOrder?.totalPrice.toLocaleString("pt-br", {
+                style: "currency",
+                currency: "BRL",
+              })}
+            </h3>
           </section>
-          
         </ActiveOrder>
       );
-    } else {
-      return <></>
     }
   };
-
   return (
     <div>
-      
       <FooterStyled>
-      
         <div>
-        
           {props.page === "home" ? (
             <>
-            {renderActiveOrder()}
+              {renderActiveOrder()}
               <section>
                 <img
                   src={Home}
