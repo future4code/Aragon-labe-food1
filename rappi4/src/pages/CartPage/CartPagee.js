@@ -7,61 +7,57 @@ import { resquetsOrder } from "../../services/Request";
 import styled from "styled-components";
 import { Button } from "@mui/material";
 
-const AddressDetails = styled.section` 
+const AddressDetails = styled.section`
   width: 360px;
   height: 76px;
   padding: 16px;
   background-color: #eee;
 
-  p{
+  p {
     color: #b8b8b8;
   }
 
-  span{
+  span {
     font-size: 16px;
     font-weight: bold;
   }
-`
+`;
 
 const SectionCart = styled.section`
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   height: 120vh;
+  margin-bottom: 200px;
 
-  button{
-  width: 328px;
-  height: 42px;
-  padding: 12px 16px;
-  border-radius: 2px;
-  background-color: #E86E5A;
-  font-size: 16px;
-  
+  button {
+    width: 328px;
+    height: 42px;
+    padding: 12px 16px;
+    border-radius: 2px;
+    background-color: #e86e5a;
+    font-size: 16px;
+  }
+`;
+
+const PaymentMethodSection = styled.section`
+  display: grid;
+
+  section {
+    margin-top: 10%;
+    text-align: center;
   }
 
-`
-
-const PaymentMethodSection = styled.section` 
-  display:grid;
-
-  section{
-    margin-top:10%;
-    text-align:center;
-  }
-
-  label{
+  label {
     margin-left: 5%;
   }
-
-`
+`;
 
 const SectionTitlePayment = styled.section`
-  margin:5%;
-
-`
+  margin: 5%;
+`;
 
 const DetailsOrders = styled.div`
- margin:5%;
-
-`
+  margin: 5%;
+`;
 
 export const CartPage = () => {
   const [profile] = useRequestData("rappi4A/profile", {});
@@ -81,20 +77,18 @@ export const CartPage = () => {
   };
 
   const valueTotal = () => {
-    let value = 0
+    let value = 0;
     for (let elemento of productsList) {
-      value += elemento?.price * elemento?.quantity
+      value += elemento?.price * elemento?.quantity;
     }
 
-    const newValue = value + restaurant?.frete
+    const newValue = value + restaurant?.frete;
     return newValue.toLocaleString("pt-br", {
       style: "currency",
       currency: "BRL",
     });
+  };
 
-  }
-
-  console.log(productsList)
   return (
     <SectionCart>
       <Header page="cart" />
@@ -107,21 +101,23 @@ export const CartPage = () => {
         {productsList?.map((product) => {
           return (
             <section>
-              <img src={product.photoUrl} width="20%" />
+              <img src={product.photoUrl} width="30%" />
               <p>
                 {product.name} - {product.quantity}
               </p>
               <p>{product.description}</p>
               <p>R$ {product.price}</p>
             </section>
-          )
+          );
         })}
 
-
-        <p>Frete: {restaurant?.frete.toLocaleString("pt-br", {
-          style: "currency",
-          currency: "BRL",
-        })}</p>
+        <p>
+          Frete:{" "}
+          {restaurant?.frete.toLocaleString("pt-br", {
+            style: "currency",
+            currency: "BRL",
+          })}
+        </p>
         <p>SUBTOTAL: {valueTotal()}</p>
       </DetailsOrders>
 
@@ -130,7 +126,6 @@ export const CartPage = () => {
         <hr />
       </SectionTitlePayment>
       <PaymentMethodSection>
-
         <label>
           <input
             type="radio"
@@ -154,13 +149,9 @@ export const CartPage = () => {
         <section>
           <button onClick={confirmOrder}>Confirmar</button>
         </section>
-
       </PaymentMethodSection>
 
       <Footer page="cart" />
     </SectionCart>
   );
 };
-
-
-

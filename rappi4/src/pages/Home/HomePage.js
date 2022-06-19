@@ -9,10 +9,10 @@ import useForm from "../../hooks/useForm";
 import { useProtectedPage } from "../../hooks/useProtectedPage";
 import { useRequestData } from "../../hooks/useRequestData";
 import { goToLogin } from "../../routes/Coordinator";
-import Box from '@mui/material/Box';
-import InputAdornment from '@mui/material/InputAdornment';
-import TextField from '@mui/material/TextField';
-import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
+import Box from "@mui/material/Box";
+import InputAdornment from "@mui/material/InputAdornment";
+import TextField from "@mui/material/TextField";
+import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import { Container } from "@mui/material";
 
 const Div = styled.div`
@@ -29,9 +29,9 @@ const Div = styled.div`
 `;
 
 const ContainerHome = styled.div`
-  font-family: 'Roboto', sans-serif;
-`
-
+  font-family: "Roboto", sans-serif;
+  margin-bottom: 200px;
+`;
 
 export default function HomePage() {
   useProtectedPage();
@@ -48,23 +48,24 @@ export default function HomePage() {
     <ContainerHome>
       <Header page="home" />
       <Container component="main" maxWidth="xs">
-      <Box sx={{ '& > :not(style)': { mr: 2, mt:2, mb:3 } }}>
-      <TextField
-         id={"query"}
-         name={"query"}
-         value={form.query}
-         onChange={onChange}
-         label="Restaurante"
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchOutlinedIcon />
-              </InputAdornment>
-            ),
-          }}
-          variant="outlined" fullWidth
-        />
-      </Box>
+        <Box sx={{ "& > :not(style)": { mr: 2, mt: 2, mb: 3 } }}>
+          <TextField
+            id={"query"}
+            name={"query"}
+            value={form.query}
+            onChange={onChange}
+            label="Restaurante"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchOutlinedIcon />
+                </InputAdornment>
+              ),
+            }}
+            variant="outlined"
+            fullWidth
+          />
+        </Box>
       </Container>
 
       <Div>
@@ -76,7 +77,7 @@ export default function HomePage() {
           );
         })}
       </Div>
-     
+
       {data.restaurants
         ?.filter((item) => {
           if (category === null) return item.id >= 1;

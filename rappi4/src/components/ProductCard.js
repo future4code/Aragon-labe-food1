@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { GlobalContext } from "../Global/GlobalContext";
 import useForm from "../hooks/useForm";
-import Button from '@mui/material/Button';
+import Button from "@mui/material/Button";
 
 const DivQuantidade = styled.div`
   position: absolute;
@@ -15,42 +15,39 @@ const DivQuantidade = styled.div`
   margin: 27px 16px 29px;
   padding: 11px 0 68px;
   background-color: #fff;
-  display:grid;
-  grid-template-columns:1fr;
-  justify-items:center;
-  align-items:center;
-
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  align-items: center;
 `;
 
-const CardProduct = styled.div` 
+const CardProduct = styled.div`
   border: 1px solid gray;
   border-radius: 10px;
-  margin-bottom:2%;
-  display:flex;
+  margin-bottom: 2%;
+  display: flex;
   flex-direction: row;
   justify-content: flex-start;
+`;
 
-`
-
-const ImageProduct = styled.img` 
-  height:100%;
-  width:30%;
+const ImageProduct = styled.img`
+  height: 190px;
+  width: 160px;
   border-radius: 10px 0 0 10px;
-
-`
+  object-fit: cover;
+`;
 
 const DescriptionProduct = styled.section`
-  h3{
-    color:#e86e5a;
+  margin-left: 20px;
+
+  h3 {
+    color: #e86e5a;
   }
 
-  p{
-    color:#b8b8b8;
+  p {
+    color: #b8b8b8;
   }
-
-`
-
-
+`;
 
 export const ProductCard = (props) => {
   const [quantity, setQuantity] = useState(1);
@@ -66,17 +63,14 @@ export const ProductCard = (props) => {
     setQuantity(e.target.value);
   };
 
-
   const { setters, getters } = useContext(GlobalContext);
 
   const { newListProducts } = getters;
 
   const { setRestaurant } = setters;
 
-
-
   const addProduct = () => {
-    const newProduct = { ...props.product, quantity: quantity }
+    const newProduct = { ...props.product, quantity: quantity };
     setRestaurant({ restaurantId: params.restaurantId, frete: props.frete });
     newListProducts(newProduct);
     setDivQuantity(!quantity);
@@ -110,7 +104,9 @@ export const ProductCard = (props) => {
             onChange={onChangeQuantity}
           />
           <section>
-            <Button onClick={addProduct} variant="text">Adicionar ao carrinho</Button>
+            <Button onClick={addProduct} variant="text">
+              Adicionar ao carrinho
+            </Button>
           </section>
         </DivQuantidade>
       ) : (

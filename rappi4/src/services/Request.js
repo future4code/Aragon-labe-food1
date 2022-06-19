@@ -90,30 +90,16 @@ export const requestEditAddress = (form, navigate) => {
     });
 };
 
-
-export const resquetsOrder = (
-  product,
-  paymentMethod,
-  restaurantId,
-  
-) => {
+export const resquetsOrder = (product, paymentMethod, restaurantId) => {
   const body = {
     products: [
       {
         id: product[0].id,
-        quantity: Number(product.quantity),
+        quantity: Number(product[0].quantity),
       },
       {
-        quantity: Number(product.quantity),
+        quantity: Number(product[1].quantity),
         id: product[1].id,
-      },
-      {
-        quantity: Number(product.quantity),
-        id: product[2].id,
-      },
-      {
-        quantity: Number(product.quantity),
-        id: product[3].id,
       },
     ],
     paymentMethod: paymentMethod,
@@ -142,7 +128,7 @@ export const requestUpDateProfile = (form, navigate) => {
     .then((res) => {
       localStorage.setItem("token", res.data.token);
       alert("Perfil alterado com sucesso!");
-      goToProfile(navigate)
+      goToProfile(navigate);
     })
     .catch((err) => {
       alert("Erro ao alterar perfil.");
