@@ -38,7 +38,7 @@ const ImageProduct = styled.img`
 `;
 
 const DescriptionProduct = styled.section`
-  margin-left: 20px;
+  margin-left: 35px;
 
   h3 {
     color: #e86e5a;
@@ -46,6 +46,11 @@ const DescriptionProduct = styled.section`
 
   p {
     color: #b8b8b8;
+  }
+  div {
+    border: 3px solid #e86e5a;
+    border-radius: 6px;
+    text-align: center;
   }
 `;
 
@@ -92,7 +97,9 @@ export const ProductCard = (props) => {
             currency: "BRL",
           })}
         </h4>
-        <button onClick={divQuantidade}>Adicionar</button>
+        <div>
+          <h3 onClick={divQuantidade}>Adicionar</h3>
+        </div>
       </DescriptionProduct>
       {divQuantity === true ? (
         <DivQuantidade>
