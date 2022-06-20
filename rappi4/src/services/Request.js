@@ -90,18 +90,9 @@ export const requestEditAddress = (form, navigate) => {
     });
 };
 
-export const resquetsOrder = (product, paymentMethod, restaurantId) => {
+export const resquetsOrder = (products, paymentMethod, restaurantId) => {
   const body = {
-    products: [
-      {
-        id: product[0].id,
-        quantity: Number(product[0].quantity),
-      },
-      {
-        quantity: Number(product[1].quantity),
-        id: product[1].id,
-      },
-    ],
+    products: products,
     paymentMethod: paymentMethod,
   };
 

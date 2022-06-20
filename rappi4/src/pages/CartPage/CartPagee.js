@@ -25,8 +25,8 @@ const AddressDetails = styled.section`
 
 const SectionCart = styled.section`
   font-family: "Roboto", sans-serif;
-  height: 120vh;
-  margin-bottom: 200px;
+  height: 150vh;
+  margin-bottom: 120%;
 
   button {
     width: 328px;
@@ -40,6 +40,7 @@ const SectionCart = styled.section`
 
 const PaymentMethodSection = styled.section`
   display: grid;
+  font-size: 1.2em;
 
   section {
     margin-top: 10%;
@@ -59,6 +60,49 @@ const DetailsOrders = styled.div`
   margin: 5%;
 `;
 
+const ImageProduct = styled.img`
+  height: 190px;
+  width: 160px;
+  border-radius: 10px 0 0 10px;
+  object-fit: cover;
+`;
+
+const DescriptionProduct = styled.section`
+  margin-left: 20px;
+
+  h3 {
+    color: #e86e5a;
+  }
+
+  div {
+    border: 3px solid #e86e5a;
+    border-radius: 6px;
+    text-align: center;
+  }
+`;
+
+const TotalCart = styled.section`
+  margin-right: 20px;
+  text-align: right;
+
+  h3 {
+    color: #e86e5a;
+  }
+
+  h4 {
+    color: black;
+  }
+`;
+
+const CardProduct = styled.div`
+  border: 1px solid gray;
+  border-radius: 10px;
+  margin-bottom: 2%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+`;
+
 export const CartPage = () => {
   const [profile] = useRequestData("rappi4A/profile", {});
 
@@ -68,12 +112,39 @@ export const CartPage = () => {
 
   const { productsList, restaurant } = states;
 
+  const { setProductsList } = setters;
+
+  function recursiva(obj) {
+    var _obj = {};
+    for (var k in obj) {
+      if (typeof obj[k] == "object" && obj.hasOwnProperty(k))
+        _obj[k] = recursiva(obj[k]);
+      else if (k == "id") _obj[k] = obj[k];
+      else if (k == "quantity") _obj[k] = obj[k];
+    }
+    return _obj;
+  }
+  var newProductList = productsList?.map(recursiva);
+
+  const busca = productsList.findIndex((product) => product.id === product.id);
+
+  const removeItemFromCart = () => {
+    let listProducts = [...productsList];
+    if (listProducts[busca].quantity === 1) {
+      listProducts.splice(busca, 1);
+    } else {
+      listProducts[busca].quantity -= 1;
+    }
+    setProductsList(listProducts);
+    window.confirm("Deseja remover o produto da lista?");
+  };
+
   const onChangeConfirm = (e) => {
     setPaymentMethod(e.target.value);
   };
 
   const confirmOrder = () => {
-    resquetsOrder(productsList, paymentMethod, restaurant.restaurantId);
+    resquetsOrder(newProductList, paymentMethod, restaurant.restaurantId);
   };
 
   const valueTotal = () => {
@@ -100,25 +171,42 @@ export const CartPage = () => {
       <DetailsOrders>
         {productsList?.map((product) => {
           return (
-            <section>
-              <img src={product.photoUrl} width="30%" />
-              <p>
-                {product.name} - {product.quantity}
-              </p>
-              <p>{product.description}</p>
-              <p>R$ {product.price}</p>
-            </section>
+            <CardProduct>
+              <section>
+                <ImageProduct width="30%" src={product.photoUrl} />
+              </section>
+
+              <DescriptionProduct>
+                <h3>{product.name}</h3>
+                <p>{product.description}</p>
+                <h4>
+                  {product.price.toLocaleString("pt-br", {
+                    style: "currency",
+                    currency: "BRL",
+                  })}
+                </h4>
+                <h3>Quantidade: {product.quantity}</h3>
+                <div>
+                  <h3 onClick={removeItemFromCart}>remover</h3>
+                </div>
+              </DescriptionProduct>
+            </CardProduct>
           );
         })}
+        <TotalCart>
+          <h4>
+            Frete:{" "}
+            {restaurant?.frete.toLocaleString("pt-br", {
+              style: "currency",
+              currency: "BRL",
+            })}
+          </h4>
 
-        <p>
-          Frete:{" "}
-          {restaurant?.frete.toLocaleString("pt-br", {
-            style: "currency",
-            currency: "BRL",
-          })}
-        </p>
-        <p>SUBTOTAL: {valueTotal()}</p>
+          <h3>
+            SUBTOTAL:
+            {valueTotal()}
+          </h3>
+        </TotalCart>
       </DetailsOrders>
 
       <SectionTitlePayment>

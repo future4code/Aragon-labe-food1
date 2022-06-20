@@ -9,21 +9,20 @@ import Edit from "../../images/editIcone.png";
 import styled from "styled-components";
 
 const ContainerProfile = styled.main`
-  font-family: 'Roboto', sans-serif;
-  height:180vh;
-`
+  font-family: "Roboto", sans-serif;
+  height: 180vh;
+`;
 
 const SectionProfile = styled.section`
   margin: 5%;
-  margin-bottom:0;
+  margin-bottom: 0;
   font-size: 16px;
-  
 
-  section{
-    display:flex;
+  section {
+    display: flex;
     justify-content: space-between;
   }
-`
+`;
 
 const SectionAddress = styled.section`
   width: 360px;
@@ -31,32 +30,29 @@ const SectionAddress = styled.section`
   margin: 16px 0;
   padding: 16px;
   background-color: #eee;
-  padding-bottom:0;
+  padding-bottom: 0;
 
-  div{
-  font-size: 16px;
-  img{
-    margin-right:5%;
-  }
+  div {
+    font-size: 16px;
+    img {
+      margin-right: 5%;
+    }
   }
 
-  section{
-    display:flex;
+  section {
+    display: flex;
     justify-content: space-between;
 
-    span{
+    span {
       color: #b8b8b8;
     }
   }
-  }
-  
-`
+`;
 
-const SectionOrders = styled.section` 
+const SectionOrders = styled.section`
   margin-left: 5%;
-  margin-right:5%;
-`
-
+  margin-right: 5%;
+`;
 
 export default function PerfilPage() {
   const navigate = useNavigate();
@@ -74,12 +70,14 @@ export default function PerfilPage() {
       <SectionProfile>
         <section>
           <span>{profile.user?.name}</span>
-          <img src={Edit} width="8%" onClick={() => goToEditProfile(navigate)} />
+          <img
+            src={Edit}
+            width="8%"
+            onClick={() => goToEditProfile(navigate)}
+          />
         </section>
-
         {profile.user?.email} <br />
         <span>{profile.user?.cpf}</span>
-
       </SectionProfile>
       <br />
       <SectionAddress>
@@ -87,11 +85,14 @@ export default function PerfilPage() {
           <div>
             <section>
               <span>Endereço Cadastrado</span>
-              <img src={Edit} width="8%" onClick={() => goToEditAddress(navigate)} />
+              <img
+                src={Edit}
+                width="8%"
+                onClick={() => goToEditAddress(navigate)}
+              />
             </section>
 
             <span>{profile.user?.address}</span>
-
           </div>
         ) : (
           <span>Usuario sem endereço cadastrado</span>
@@ -103,7 +104,6 @@ export default function PerfilPage() {
         <hr />
         <OrdersHistoryCard dados={data} />
       </SectionOrders>
-
 
       <Footer page="profile" />
     </ContainerProfile>
