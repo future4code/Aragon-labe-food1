@@ -5,7 +5,7 @@
 - https://scene.zeplin.io/project/5dd5ae92669af1bc817c8359
 
 ## Link Surge 
-https://general-fight.surge.sh/login - Entrega 17/06
+https://lewd-business.surge.sh/login - Entrega 17/06
 
 login: lucasmacedo@msn.com
 senha: 12345678
